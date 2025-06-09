@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Skin Type</title>
+    <title>Skin Type Analysis</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style type="text/tailwindcss">
       @theme {
         --color-primary: #2c9d8f;
@@ -23,330 +24,229 @@
         display: flex;
         gap: 40px;
       }
+
+      .fade-in {
+        animation: fadeIn 0.5s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
     </style>
   </head>
-  <body>
-    <header class="fixed top-0 left-0 w-full z-50 bg-white">
-      <nav
-        class="flex justify-between items-center bg-white py-2 container mx-auto"
-      >
-        <div class="flex items-center w-[80px] h-[80px]">
-          <img
-            src="{{ url_for('static', filename='images/logo.png') }}"
-            alt=""
-          />
-        </div>
-        <ul class="menu">
-          <li><a href="/">Home</a></li>
-          <li><a href="/#about-section">About</a></li>
-          <li><a href="/scantype">Skin Type</a></li>
-        </ul>
-        <div class="flex items-center gap-2 bg-primary rounded-xl px-4 py-2">
-          <a href="#" class="text-white text-base font-semibold">Scan Skin</a>
-          <div
-            class="w-[28px] h-[28px] bg-[#2C9D8F] rounded-full flex items-center justify-center"
-          >
-            <svg
-              width="38"
-              height="38"
-              viewBox="0 0 38 38"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M32.6562 5.9375V11.875C32.6562 12.0325 32.5937 12.1835 32.4823 12.2948C32.371 12.4062 32.22 12.4688 32.0625 12.4688C31.905 12.4688 31.754 12.4062 31.6427 12.2948C31.5313 12.1835 31.4688 12.0325 31.4688 11.875V6.53125H26.125C25.9675 6.53125 25.8165 6.46869 25.7052 6.35734C25.5938 6.24599 25.5312 6.09497 25.5312 5.9375C25.5312 5.78003 25.5938 5.62901 25.7052 5.51766C25.8165 5.40631 25.9675 5.34375 26.125 5.34375H32.0625C32.22 5.34375 32.371 5.40631 32.4823 5.51766C32.5937 5.62901 32.6562 5.78003 32.6562 5.9375ZM11.875 31.4688H6.53125V26.125C6.53125 25.9675 6.46869 25.8165 6.35734 25.7052C6.24599 25.5938 6.09497 25.5312 5.9375 25.5312C5.78003 25.5312 5.62901 25.5938 5.51766 25.7052C5.40631 25.8165 5.34375 25.9675 5.34375 26.125V32.0625C5.34375 32.22 5.40631 32.371 5.51766 32.4823C5.62901 32.5937 5.78003 32.6562 5.9375 32.6562H11.875C12.0325 32.6562 12.1835 32.5937 12.2948 32.4823C12.4062 32.371 12.4688 32.22 12.4688 32.0625C12.4688 31.905 12.4062 31.754 12.2948 31.6427C12.1835 31.5313 12.0325 31.4688 11.875 31.4688ZM32.0625 25.5312C31.905 25.5312 31.754 25.5938 31.6427 25.7052C31.5313 25.8165 31.4688 25.9675 31.4688 26.125V31.4688H26.125C25.9675 31.4688 25.8165 31.5313 25.7052 31.6427C25.5938 31.754 25.5312 31.905 25.5312 32.0625C25.5312 32.22 25.5938 32.371 25.7052 32.4823C25.8165 32.5937 25.9675 32.6562 26.125 32.6562H32.0625C32.22 32.6562 32.371 32.5937 32.4823 32.4823C32.5937 32.371 32.6562 32.22 32.6562 32.0625V26.125C32.6562 25.9675 32.5937 25.8165 32.4823 25.7052C32.371 25.5938 32.22 25.5312 32.0625 25.5312ZM5.9375 12.4688C6.09497 12.4688 6.24599 12.4062 6.35734 12.2948C6.46869 12.1835 6.53125 12.0325 6.53125 11.875V6.53125H11.875C12.0325 6.53125 12.1835 6.46869 12.2948 6.35734C12.4062 6.24599 12.4688 6.09497 12.4688 5.9375C12.4688 5.78003 12.4062 5.62901 12.2948 5.51766C12.1835 5.40631 12.0325 5.34375 11.875 5.34375H5.9375C5.78003 5.34375 5.62901 5.40631 5.51766 5.51766C5.40631 5.62901 5.34375 5.78003 5.34375 5.9375V11.875C5.34375 12.0325 5.40631 12.1835 5.51766 12.2948C5.62901 12.4062 5.78003 12.4688 5.9375 12.4688ZM11.875 11.2812H26.125C26.2825 11.2812 26.4335 11.3438 26.5448 11.4552C26.6562 11.5665 26.7188 11.7175 26.7188 11.875V26.125C26.7188 26.2825 26.6562 26.4335 26.5448 26.5448C26.4335 26.6562 26.2825 26.7188 26.125 26.7188H11.875C11.7175 26.7188 11.5665 26.6562 11.4552 26.5448C11.3438 26.4335 11.2812 26.2825 11.2812 26.125V11.875C11.2812 11.7175 11.3438 11.5665 11.4552 11.4552C11.5665 11.3438 11.7175 11.2812 11.875 11.2812ZM12.4688 25.5312H25.5312V12.4688H12.4688V25.5312Z"
-                fill="white"
-              />
-            </svg>
-          </div>
-        </div>
-      </nav>
-    </header>
-    <section class="flex justify-between items-center mt-24 container mx-auto">
-      <div class="w-full flex flex-col items-center">
-        <h1 class="font-bold text-[48px] text-center text-secondary">
+  <body class="bg-gray-50">
+
+    <section class="flex justify-center items-center mt-24 container mx-auto px-4">
+      <div class="w-full max-w-4xl flex flex-col items-center">
+        <h1 class="font-bold text-[48px] text-center text-secondary leading-tight">
           Upload atau <span class="text-primary">Scan</span> wajah kamu
         </h1>
-        <p class="text-center text-desc text-[20px] mt-4">
-          Kami akan membantu kamu untuk mengetahui jenis kulit wajah kamu Fitur
+        <p class="text-center text-desc text-[20px] mt-4 max-w-3xl">
+          Kami akan membantu kamu untuk mengetahui jenis kulit wajah kamu. Fitur
           Upload dan Scan wajah ini dibangun menggunakan Artificial Intelligence
           arsitektur Vision Transformer yang akan membantu kamu mengenali jenis
-          kulitmu
+          kulitmu.
         </p>
       </div>
     </section>
-    <section class="mt-20">
-      <div
-        class="grid grid-cols-1 md:grid-cols-2 gap-4 container mx-auto mt-10"
-      >
-        <div
-          class="w-full rounded-xl h-[333px] flex flex-col items-center justify-center"
-          style="border: 3px solid #2c9d8f"
-        >
-          <input
-            class="bg-primary text-white px-4 py-2 rounded-lg max-w-[288px] hidden"
-            type="file"
-            name="Upload"
-            id="upload"
-            placeholder="upload image"
-            accept="image/*"
-          />
-          <img id="previewImage" class="hidden w-full h-[83%] object-cover rounded-xl" alt="img-preview"/>
-          <label
-            for="upload"
-            id="uploadLabel"
-            class="text-white bg-primary text-base font-semibold mt-2 cursor-pointer px-4 py-2 rounded-lg max-w-[288px]"
-            >Upload Image</label
-          >
-          <button
-            id="analyzeUpload"
-            class="hidden text-white bg-primary text-base font-semibold mt-4 px-6 py-2 rounded-lg"
-          >Mulai Analisis</button>
-        </div>
-        <div
-          class="bg-primary w-full rounded-xl h-[333px] flex flex-col items-center justify-center"
-        >
-          <video id="video" class="hidden w-full h-full object-cover rounded-xl"></video>
-          <canvas id="canvas" class="hidden w-full h-full object-cover rounded-xl"></canvas>
-          <button id="startCamera"
-            class="flex items-center gap-2 bg-primary rounded-xl px-4 py-2 border-2 border-white"
-          >
-            <span class="text-white text-base font-semibold">Scan Skin</span>
-            <div
-              class="w-[28px] h-[28px] bg-[#2C9D8F] rounded-full flex items-center justify-center"
-            >
-              <svg
-                width="38"
-                height="38"
-                viewBox="0 0 38 38"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M32.6562 5.9375V11.875C32.6562 12.0325 32.5937 12.1835 32.4823 12.2948C32.371 12.4062 32.22 12.4688 32.0625 12.4688C31.905 12.4688 31.754 12.4062 31.6427 12.2948C31.5313 12.1835 31.4688 12.0325 31.4688 11.875V6.53125H26.125C25.9675 6.53125 25.8165 6.46869 25.7052 6.35734C25.5938 6.24599 25.5312 6.09497 25.5312 5.9375C25.5312 5.78003 25.5938 5.62901 25.7052 5.51766C25.8165 5.40631 25.9675 5.34375 26.125 5.34375H32.0625C32.22 5.34375 32.371 5.40631 32.4823 5.51766C32.5937 5.62901 32.6562 5.78003 32.6562 5.9375ZM11.875 31.4688H6.53125V26.125C6.53125 25.9675 6.46869 25.8165 6.35734 25.7052C6.24599 25.5938 6.09497 25.5312 5.9375 25.5312C5.78003 25.5312 5.62901 25.5938 5.51766 25.7052C5.40631 25.8165 5.34375 25.9675 5.34375 26.125V32.0625C5.34375 32.22 5.40631 32.371 5.51766 32.4823C5.62901 32.5937 5.78003 32.6562 5.9375 32.6562H11.875C12.0325 32.6562 12.1835 32.5937 12.2948 32.4823C12.4062 32.371 12.4688 32.22 12.4688 32.0625C12.4688 31.905 12.4062 31.754 12.2948 31.6427C12.1835 31.5313 12.0325 31.4688 11.875 31.4688ZM32.0625 25.5312C31.905 25.5312 31.754 25.5938 31.6427 25.7052C31.5313 25.8165 31.4688 25.9675 31.4688 26.125V31.4688H26.125C25.9675 31.4688 25.8165 31.5313 25.7052 31.6427C25.5938 31.754 25.5312 31.905 25.5312 32.0625C25.5312 32.22 25.5938 32.371 25.7052 32.4823C25.8165 32.5937 25.9675 32.6562 26.125 32.6562H32.0625C32.22 32.6562 32.371 32.5937 32.4823 32.4823C32.5937 32.371 32.6562 32.22 32.6562 32.0625V26.125C32.6562 25.9675 32.5937 25.8165 32.4823 25.7052C32.371 25.5938 32.22 25.5312 32.0625 25.5312ZM5.9375 12.4688C6.09497 12.4688 6.24599 12.4062 6.35734 12.2948C6.46869 12.1835 6.53125 12.0325 6.53125 11.875V6.53125H11.875C12.0325 6.53125 12.1835 6.46869 12.2948 6.35734C12.4062 6.24599 12.4688 6.09497 12.4688 5.9375C12.4688 5.78003 12.4062 5.62901 12.2948 5.51766C12.1835 5.40631 12.0325 5.34375 11.875 5.34375H5.9375C5.78003 5.34375 5.62901 5.40631 5.51766 5.51766C5.40631 5.62901 5.34375 5.78003 5.34375 5.9375V11.875C5.34375 12.0325 5.40631 12.1835 5.51766 12.2948C5.62901 12.4062 5.78003 12.4688 5.9375 12.4688ZM11.875 11.2812H26.125C26.2825 11.2812 26.4335 11.3438 26.5448 11.4552C26.6562 11.5665 26.7188 11.7175 26.7188 11.875V26.125C26.7188 26.2825 26.6562 26.4335 26.5448 26.5448C26.4335 26.6562 26.2825 26.7188 26.125 26.7188H11.875C11.7175 26.7188 11.5665 26.6562 11.4552 26.5448C11.3438 26.4335 11.2812 26.2825 11.2812 26.125V11.875C11.2812 11.7175 11.3438 11.5665 11.4552 11.4552C11.5665 11.3438 11.7175 11.2812 11.875 11.2812ZM12.4688 25.5312H25.5312V12.4688H12.4688V25.5312Z"
-                  fill="white"
-                />
-              </svg>
+
+    <section class="mt-20 container mx-auto px-4">
+      <!-- Error Message -->
+      {% if error %}
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6 text-center fade-in">
+        <strong>Error:</strong> {{ error }}
+      </div>
+      {% endif %}
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+
+        <!-- Upload Section -->
+        <form action="{{ url_for('skinType') }}" method="POST" enctype="multipart/form-data" id="uploadForm"
+          class="w-full bg-white rounded-xl h-[400px] flex flex-col items-center justify-center border-4 border-primary border-dashed hover:border-solid transition-all duration-300 shadow-lg">
+          
+          <input class="hidden" type="file" name="image" id="fileInput" accept="image/*" required />
+          
+          <div id="uploadArea" class="flex flex-col items-center justify-center h-full w-full">
+            <svg class="w-16 h-16 text-primary mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+            </svg>
+            <p class="text-secondary text-lg font-medium mb-4">Upload gambar wajah Anda</p>
+            <button type="button" id="selectFileBtn"
+              class="text-white bg-primary text-base font-semibold cursor-pointer px-6 py-3 rounded-lg hover:bg-opacity-80 transition-all">
+              Pilih File
+            </button>
+          </div>
+
+          <div id="previewArea" class="hidden w-full h-full p-4">
+            <img id="previewImage" class="w-full h-[60%] object-cover rounded-xl mb-4" alt="Preview" />
+            <div class="flex gap-3 justify-center">
+              <button type="button" id="resetBtn"
+                class="text-secondary bg-gray-200 text-base font-semibold px-4 py-2 rounded-lg hover:bg-gray-300 transition-all">
+                Ganti Foto
+              </button>
+              <button type="submit" id="analyzeBtn"
+                class="text-white bg-primary text-base font-semibold px-6 py-2 rounded-lg hover:bg-opacity-80 transition-all">
+                Mulai Analisis
+              </button>
             </div>
-          </button>
-          <button id="captureButton" class="hidden flex items-center gap-2 bg-white rounded-xl px-4 py-2 border-2 border-primary mt-2">
-            <span class="text-primary text-base font-semibold">Ambil Foto</span>
-          </button>
-          <button
-            id="analyzeCapture"
-            class="hidden text-white bg-primary text-base font-semibold mt-4 px-6 py-2 rounded-lg border-2 border-white"
-          >Mulai Analisis</button>
+          </div>
+        </form>
+
+        <!-- Camera Section (Placeholder) -->
+        <div class="bg-primary w-full rounded-xl h-[400px] flex flex-col items-center justify-center shadow-lg">
+          <svg class="w-16 h-16 text-white mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          </svg>
+          <p class="text-white text-center text-lg font-medium">Fitur Scan via Kamera</p>
+          <p class="text-white text-center text-base mt-2 opacity-80">Segera hadir!</p>
+        </div>
+
+      </div>
+
+      <!-- Results Section -->
+      {% if predicted_class %}
+      <div class="mt-12 bg-white rounded-xl p-8 shadow-lg fade-in max-w-2xl mx-auto">
+        <div class="text-center">
+          <h2 class="text-3xl font-bold text-secondary mb-4">🎉 Hasil Analisis Kulit</h2>
+          
+          <div class="bg-primary bg-opacity-10 rounded-lg p-6 mb-6">
+            <p class="text-lg mb-2">Jenis kulit Anda:</p>
+            <p class="text-2xl font-bold text-white mb-4">{{ predicted_class }}</p>
+            <div class="flex items-center justify-center gap-2">
+              <span class="text-base">Tingkat kepercayaan:</span>
+             
+               
+              <span class="text-base font-semibold">{{ confidence }}%</span>
+            </div>
+          </div>
+          
+          <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Hasil Upload"
+            class="mx-auto max-h-[300px] object-contain rounded-lg shadow-md" />
         </div>
       </div>
+
+       <!-- Rekomendasi Produk -->
+      <div class="mt-10 max-w-4xl mx-auto">
+        <h3 class="text-2xl font-bold text-secondary mb-6 text-center">Rekomendasi Produk Untuk {{ predicted_class }}</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          
+          <!-- Card Produk 1 -->
+          <div class="bg-gray rounded-xl shadow-md p-4 flex flex-col">
+            <img src="{{ url_for('static', filename='images/produk1.png') }}" alt="Produk 1" class="rounded-lg mb-4 object-cover  w-full" />
+            <h4 class="font-semibold text-primary mb-2">Hydrating Facial Cleanser</h4>
+            <p class="text-desc text-sm mb-4">Membersihkan kulit tanpa membuatnya kering, cocok untuk kulit {{ predicted_class }}.</p>
+            <a href="#" class="mt-auto text-white bg-primary px-4 py-2 rounded-lg text-center hover:bg-opacity-80 transition">Beli Sekarang</a>
+          </div>
+          
+          <!-- Card Produk 2 -->
+          <div class="rounded-xl shadow-md p-4 flex flex-col">
+            <img src="{{ url_for('static', filename='images/produk1.png') }}" alt="Produk 2" class="rounded-lg mb-4 object-cover w-full" />
+            <h4 class="font-semibold text-primary mb-2">Moisturizer SPF 30</h4>
+            <p class="text-desc text-sm mb-4">Melindungi dan melembapkan kulitmu sepanjang hari, sempurna untuk jenis kulit {{ predicted_class }}.</p>
+            <a href="#" class="mt-auto text-white bg-primary px-4 py-2 rounded-lg text-center hover:bg-opacity-80 transition">Beli Sekarang</a>
+          </div>
+
+          <!-- Card Produk 3 -->
+          <div class="rounded-xl shadow-md p-4 flex flex-col">
+            <img src="{{ url_for('static', filename='images/produk1.png') }}" alt="Produk 3" class="rounded-lg mb-4 object-cover w-full" />
+            <h4 class="font-semibold text-primary mb-2">Gentle Exfoliating Scrub</h4>
+            <p class="text-desc text-sm mb-4">Mengangkat sel kulit mati tanpa iritasi, ideal untuk kulit {{ predicted_class }}.</p>
+            <a href="#" class="mt-auto text-white bg-primary px-4 py-2 rounded-lg text-center hover:bg-opacity-80 transition">Beli Sekarang</a>
+          </div>
+
+        </div>
+      </div>
+      {% endif %}
     </section>
-    <footer class="bg-[#EAF5F4] py-10 pt-16 mt-40">
-      <div class="container mx-auto flex justify-between">
-        <div class="flex items-center w-[80px] h-[80px]">
-          <img
-            src="{{ url_for('static', filename='images/logo.png') }}"
-            alt=""
-          />
-          <span class="text-[32px] text-primary font-bold ml-2">
-            CS<span class="text-secondary">kin</span>
-          </spa>
-        </div>
-        <div class="flex flex-col gap-4 text-[#515151]">
-          <h2 class="font-semibold">Menu</h2>
-          <ul class="flex flex-col gap-4 text-[#515151]">
-            <li><a href="./index.html">Home</a></li>
-            <li><a href="./about.html">About</a></li>
-            <li><a href="./skintype.html">Skin Type</a></li>
-          </ul>
-        </div>
-        <div class="flex flex-col gap-4 text-[#515151]">
-          <h2 class="font-semibold">Kontak / Hubungi Kami</h2>
-          <ul class="flex flex-col gap-4 text-[#515151]">
-            <li><a href="#">
-              Email : dilalovegood@gmail.com
-            </a></li>
-            <li><a href="#">
-              WhatsApp: +62 812 3456 7890
-            </a></li>
-            <li><a href="#">
-              Instagram: @cskin
-            </a></li>
-          </ul>
-        </div>
-        <div class="flex flex-col gap-4">
-          <a class="flex items-center gap-2 bg-primary rounded-xl px-4 py-2">
-            <span href="#" class="text-white text-base font-semibold">Scan Skin</span>
-            <div
-              class="w-[28px] h-[28px] bg-[#2C9D8F] rounded-full flex items-center justify-center"
-            >
-              <svg
-                width="38"
-                height="38"
-                viewBox="0 0 38 38"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M32.6562 5.9375V11.875C32.6562 12.0325 32.5937 12.1835 32.4823 12.2948C32.371 12.4062 32.22 12.4688 32.0625 12.4688C31.905 12.4688 31.754 12.4062 31.6427 12.2948C31.5313 12.1835 31.4688 12.0325 31.4688 11.875V6.53125H26.125C25.9675 6.53125 25.8165 6.46869 25.7052 6.35734C25.5938 6.24599 25.5312 6.09497 25.5312 5.9375C25.5312 5.78003 25.5938 5.62901 25.7052 5.51766C25.8165 5.40631 25.9675 5.34375 26.125 5.34375H32.0625C32.22 5.34375 32.371 5.40631 32.4823 5.51766C32.5937 5.62901 32.6562 5.78003 32.6562 5.9375ZM11.875 31.4688H6.53125V26.125C6.53125 25.9675 6.46869 25.8165 6.35734 25.7052C6.24599 25.5938 6.09497 25.5312 5.9375 25.5312C5.78003 25.5312 5.62901 25.5938 5.51766 25.7052C5.40631 25.8165 5.34375 25.9675 5.34375 26.125V32.0625C5.34375 32.22 5.40631 32.371 5.51766 32.4823C5.62901 32.5937 5.78003 32.6562 5.9375 32.6562H11.875C12.0325 32.6562 12.1835 32.5937 12.2948 32.4823C12.4062 32.371 12.4688 32.22 12.4688 32.0625C12.4688 31.905 12.4062 31.754 12.2948 31.6427C12.1835 31.5313 12.0325 31.4688 11.875 31.4688ZM32.0625 25.5312C31.905 25.5312 31.754 25.5938 31.6427 25.7052C31.5313 25.8165 31.4688 25.9675 31.4688 26.125V31.4688H26.125C25.9675 31.4688 25.8165 31.5313 25.7052 31.6427C25.5938 31.754 25.5312 31.905 25.5312 32.0625C25.5312 32.22 25.5938 32.371 25.7052 32.4823C25.8165 32.5937 25.9675 32.6562 26.125 32.6562H32.0625C32.22 32.6562 32.371 32.5937 32.4823 32.4823C32.5937 32.371 32.6562 32.22 32.6562 32.0625V26.125C32.6562 25.9675 32.5937 25.8165 32.4823 25.7052C32.371 25.5938 32.22 25.5312 32.0625 25.5312ZM5.9375 12.4688C6.09497 12.4688 6.24599 12.4062 6.35734 12.2948C6.46869 12.1835 6.53125 12.0325 6.53125 11.875V6.53125H11.875C12.0325 6.53125 12.1835 6.46869 12.2948 6.35734C12.4062 6.24599 12.4688 6.09497 12.4688 5.9375C12.4688 5.78003 12.4062 5.62901 12.2948 5.51766C12.1835 5.40631 12.0325 5.34375 11.875 5.34375H5.9375C5.78003 5.34375 5.62901 5.40631 5.51766 5.51766C5.40631 5.62901 5.34375 5.78003 5.34375 5.9375V11.875C5.34375 12.0325 5.40631 12.1835 5.51766 12.2948C5.62901 12.4062 5.78003 12.4688 5.9375 12.4688ZM11.875 11.2812H26.125C26.2825 11.2812 26.4335 11.3438 26.5448 11.4552C26.6562 11.5665 26.7188 11.7175 26.7188 11.875V26.125C26.7188 26.2825 26.6562 26.4335 26.5448 26.5448C26.4335 26.6562 26.2825 26.7188 26.125 26.7188H11.875C11.7175 26.7188 11.5665 26.6562 11.4552 26.5448C11.3438 26.4335 11.2812 26.2825 11.2812 26.125V11.875C11.2812 11.7175 11.3438 11.5665 11.4552 11.4552C11.5665 11.3438 11.7175 11.2812 11.875 11.2812ZM12.4688 25.5312H25.5312V12.4688H12.4688V25.5312Z"
-                  fill="white"
-                />
-              </svg>
-            </div>
-          </a>
-          <a class="bg-white rounded-xl px-4 py-2 border border-primary text-center">
-            <span href="#" class="text-primary text-center text-base font-semibold">Konsultasi</span>
-          </a>
-        </div>
-      </div>
-      <div class="container mx-auto mt-20">
-        <hr>
-        <div class="text-center justify-between flex mt-5">
-          <p class="text-[#515151] text-sm font-normal">© 2023 CSKIN. All rights reserved.</p>
-          <p class="text-[#515151] text-sm font-normal">Terms of Service | Privacy Policy</p>
-        </div>
-      </div>
-    </footer>
-
     <script>
-      const video = document.getElementById('video');
-      const canvas = document.getElementById('canvas');
-      const startButton = document.getElementById('startCamera');
-      const captureButton = document.getElementById('captureButton');
-      const ctx = canvas.getContext('2d');
-      const upload = document.getElementById('upload');
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get all necessary elements
+      const fileInput = document.getElementById('fileInput');
+      const selectFileBtn = document.getElementById('selectFileBtn');
+      const resetBtn = document.getElementById('resetBtn');
+      const uploadArea = document.getElementById('uploadArea');
+      const previewArea = document.getElementById('previewArea');
       const previewImage = document.getElementById('previewImage');
-      const uploadLabel = document.getElementById('uploadLabel');
-      const analyzeUpload = document.getElementById('analyzeUpload');
-      const analyzeCapture = document.getElementById('analyzeCapture');
+      const analyzeBtn = document.getElementById('analyzeBtn');
+      const uploadForm = document.getElementById('uploadForm');
 
-      startButton.addEventListener('click', async () => {
-        try {
-          const stream = await navigator.mediaDevices.getUserMedia({ 
-            video: { 
-              facingMode: 'user',
-              width: { ideal: 1280 },
-              height: { ideal: 720 }
-            } 
-          });
-          video.srcObject = stream;
-          video.classList.remove('hidden');
-          video.play();
-          startButton.classList.add('hidden');
-          captureButton.classList.remove('hidden');
-        } catch (err) {
-          console.error('Error accessing camera:', err);
-          alert('Tidak dapat mengakses kamera');
-        }
+      // Click handler for select file button
+      selectFileBtn.addEventListener('click', function() {
+        fileInput.click();
       });
 
-      // captureButton.addEventListener('click', () => {
-      //   canvas.width = video.videoWidth;
-      //   canvas.height = video.videoHeight;
-      //   ctx.drawImage(video, 0, 0);
+      // File input change handler
+      fileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
         
-      //   // Hentikan stream kamera
-      //   const stream = video.srcObject;
-      //   const tracks = stream.getTracks();
-      //   tracks.forEach(track => track.stop());
-        
-      //   // Tampilkan hasil foto
-      //   video.classList.add('hidden');
-      //   canvas.classList.remove('hidden');
-        
-      //   // Convert canvas to blob
-      //   canvas.toBlob((blob) => {
-      //     const formData = new FormData();
-      //     formData.append('image', blob, 'captured-photo.jpg');
-          
-      //     // Kirim ke server (sesuaikan URL endpoint)
-      //     fetch('/upload-photo', {
-      //       method: 'POST',
-      //       body: formData
-      //     })
-      //     .then(response => response.json())
-      //     .then(data => {
-      //       console.log('Success:', data);
-      //       // Handle response dari server
-      //     })
-      //     .catch(error => {
-      //       console.error('Error:', error);
-      //     });
-      //   }, 'image/jpeg');
-      // });
-
-      upload.addEventListener('change', (e) => {
-        const file = e.target.files[0];
         if (file) {
+          // Validate file type
+          const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+          if (!allowedTypes.includes(file.type)) {
+            alert('Format file tidak didukung. Gunakan JPG, PNG, atau GIF.');
+            fileInput.value = '';
+            return;
+          }
+          
+          // Validate file size (max 5MB)
+          if (file.size > 5 * 1024 * 1024) {
+            alert('Ukuran file terlalu besar. Maksimal 5MB.');
+            fileInput.value = '';
+            return;
+          }
+
+          // Create FileReader to preview image
           const reader = new FileReader();
-          reader.onload = (e) => {
+          
+          reader.onload = function(e) {
             previewImage.src = e.target.result;
-            previewImage.classList.remove('hidden');
-            uploadLabel.classList.add('hidden');
-            analyzeUpload.classList.remove('hidden');
+            uploadArea.classList.add('hidden');
+            previewArea.classList.remove('hidden');
           };
+          
+          reader.onerror = function() {
+            alert('Gagal membaca file. Silakan coba lagi.');
+            fileInput.value = '';
+          };
+          
           reader.readAsDataURL(file);
         }
       });
 
-      // Modifikasi event listener capture button
-      captureButton.addEventListener('click', () => {
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        ctx.drawImage(video, 0, 0);
-        
-        const stream = video.srcObject;
-        const tracks = stream.getTracks();
-        tracks.forEach(track => track.stop());
-        
-        video.classList.add('hidden');
-        canvas.classList.remove('hidden');
-        captureButton.classList.add('hidden');
-        analyzeCapture.classList.remove('hidden');
+      // Reset button handler
+      resetBtn.addEventListener('click', function() {
+        fileInput.value = '';
+        uploadArea.classList.remove('hidden');
+        previewArea.classList.add('hidden');
       });
 
-      // Handle analisis untuk uploaded image
-      analyzeUpload.addEventListener('click', () => {
-        const formData = new FormData();
-        formData.append('image', upload.files[0]);
-
-        window.location.href = '/result'
+      // Form submission handler
+      uploadForm.addEventListener('submit', function(e) {
+        if (!fileInput.files || !fileInput.files[0]) {
+          e.preventDefault();
+          alert('Silakan pilih file gambar terlebih dahulu.');
+          return false;
+        }
         
-        // fetch('/analyze-photo', {
-        //   method: 'POST',
-        //   body: formData
-        // })
-        // .then(response => response.json())
-        // .then(data => {
-        //   console.log('Analysis result:', data);
-        //   // Redirect atau tampilkan hasil
-        //   window.location.href = `/result?id=${data.id}`;
-        // })
-        // .catch(error => {
-        //   console.error('Error:', error);
-        // });
+        analyzeBtn.innerHTML = 'Menganalisis...';
+        analyzeBtn.disabled = true;
       });
 
-      // Handle analisis untuk captured image
-      analyzeCapture.addEventListener('click', () => {
-        window.location.href = '/result'
-        // canvas.toBlob((blob) => {
-        //   const formData = new FormData();
-        //   formData.append('image', blob, 'captured-photo.jpg');
-          
-        //   fetch('/analyze-photo', {
-        //     method: 'POST',
-        //     body: formData
-        //   })
-        //   .then(response => response.json())
-        //   .then(data => {
-        //     console.log('Analysis result:', data);
-        //     // Redirect atau tampilkan hasil
-        //     window.location.href = `/result?id=${data.id}`;
-        //   })
-        //   .catch(error => {
-        //     console.error('Error:', error);
-        //   });
-        // }, 'image/jpeg');
-      });
+      // Auto-scroll to results if available
+      {% if predicted_class %}
+      setTimeout(function() {
+        const resultSection = document.querySelector('.fade-in');
+        if (resultSection) {
+          resultSection.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center' 
+          });
+        }
+      }, 500);
+      {% endif %}
+    });
     </script>
   </body>
 </html>
